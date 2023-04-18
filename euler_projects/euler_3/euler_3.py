@@ -1,11 +1,15 @@
+# Project Euler, Challenge 3
+# The prime factors of 13195 are 5, 7, 13 and 29.
+# What is the largest prime factor of the number 600851475143 ?
+
 # -----------------------------------
 
 def get_divisors(input):
     
-    # Mathematically a number is always divisible by itself and 1.
+    # A number is always divisible by itself and 1.
         # You can just append the values and save processing.
     # A number's divisor is never more than half of itself.
-        # You only need to iterate half way.
+        # (You only need to iterate half way).
     
     value = [1]
     i = 2
@@ -22,16 +26,10 @@ def get_pFactors(input):
     
     # Each number should be split into two factors.
     # Each factor needs to be reduced until it's a prime number.
-    # Due to the commutiative law, you can simply use the smallest
-    # known prime: 2. This reduces the complexity of the loop.
-
-    # Take a number
-        # Modulo by 'i', if not 0, increment until n 
-        # If 0, store result
-    # Take second value, do the same until no more division possible
+    # The easiest method is to try from smallest (2) to largest divisors,
+    #   then, subdividing the result until you can no longer.
     
     factors = []
-    divisors = []
     i = 2
     while i <= input:
         if input % i == 0:
@@ -39,14 +37,13 @@ def get_pFactors(input):
             input /= i
             i = 1
         i += 1
-        # divisors.append(i)
     return factors
 
 # -----------------------------------
 # Unit Tests
 
 # Proving that the pFactors function returns valid data requires
-    # that we loop through an arbitrary list of numbers, the product
+    # that we loop through an finite list of numbers, the product
     # of the result should equal the input.
 
 def get_pFactorsProof(start, end):
@@ -67,6 +64,9 @@ def get_pFactorsProof(start, end):
 
 # -----------------------------------
 
-# print(get_divisors(30))
-print(get_pFactors(13195))
-# print(get_pFactorsProof(2, 50))
+# The output of get_pFactors() already returns a sorted list.
+# To get the largest item, simply grab the last item in the list.
+
+n = 600851475143
+print("All prime factors of", n, ":", get_pFactors(n))
+print("Largest prime factor of", n, ":", get_pFactors(n)[-1])
